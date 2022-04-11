@@ -7,7 +7,7 @@ import gql from 'graphql-tag';
 export default function DefaultSeo() {
   const {
     data: {
-      shop: {name, description},
+      shop: {name: shopName, description: shopDescription},
     },
   } = useShopQuery({
     query: QUERY,
@@ -19,8 +19,8 @@ export default function DefaultSeo() {
     <Seo
       type="defaultSeo"
       data={{
-        title: name,
-        description,
+        title: shopName,
+        description: shopDescription,
       }}
     />
   );

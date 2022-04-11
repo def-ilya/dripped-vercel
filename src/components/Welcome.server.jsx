@@ -1,9 +1,4 @@
-import {
-  useShop,
-  useShopQuery,
-  flattenConnection,
-  Link,
-} from '@shopify/hydrogen';
+import {useShopQuery, flattenConnection, Link} from '@shopify/hydrogen';
 import gql from 'graphql-tag';
 import {Suspense} from 'react';
 
@@ -44,13 +39,7 @@ function BoxFallback() {
 }
 
 function StorefrontInfo() {
-  const {languageCode} = useShop();
-
-  const {data} = useShopQuery({
-    query: QUERY,
-    variables: {language: languageCode},
-    preload: true,
-  });
+  const {data} = useShopQuery({query: QUERY, preload: true});
   const shopName = data ? data.shop.name : '';
   const products = data && flattenConnection(data.products);
   const collections = data && flattenConnection(data.collections);
@@ -97,13 +86,7 @@ function StorefrontInfo() {
 }
 
 function TemplateLinks() {
-  const {languageCode} = useShop();
-
-  const {data} = useShopQuery({
-    query: QUERY,
-    variables: {language: languageCode},
-    preload: true,
-  });
+  const {data} = useShopQuery({query: QUERY, preload: true});
   const products = data && flattenConnection(data.products);
   const collections = data && flattenConnection(data.collections);
 
@@ -150,32 +133,51 @@ function TemplateLinks() {
  */
 export default function Welcome() {
   return (
-    <div className="text-gray-900 bg-[url('https://ik.imagekit.io/u0naetqfybt/asap_-uxhv42QA.gif')] pt-8 rounded-none md:rounded-md my-0 mt-0 -mx-4 xl:-mx-12 saturate-0 contrast-60">
-      <div className="text-center mb-16 text-white backdrop-blur-md w-full">
-        <h1 className="font-extrabold mb-4 text-5xl md:text-7xl ">dripped.</h1>
+    <div className="text-gray-900 pt-16 rounded-[40px] my-16 px-4 xl:px-12 bg-gradient-to-b from-white -mx-4 xl:-mx-12">
+      <div className="text-center mb-16">
+        <h1 className="font-extrabold mb-4 text-5xl md:text-7xl">
+          Hello, Hydrogen
+        </h1>
         <p className="text-lg mb-8">
-          He gon' make it to a Benz out of that Datsun.
+          Welcome to your custom storefront. Let&rsquo;s get building.
         </p>
+        <div className="flex flex-col lg:flex-row justify-center items-center gap-8 text-gray-700">
+          <DocsButton
+            url="https://shopify.dev/custom-storefronts/hydrogen"
+            label="Browse Hydrogen documentation"
+          />
+          <DocsButton url="/graphql" label="Open the GraphiQL explorer" />
+          <DocsButton
+            url="https://github.com/Shopify/hydrogen-examples"
+            label="Explore Hydrogen examples"
+          />
+        </div>
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16"></div>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
+        <Suspense fallback={<BoxFallback />}>
+          <StorefrontInfo />
+        </Suspense>
+        <Suspense fallback={<BoxFallback />}>
+          <TemplateLinks />
+        </Suspense>
+      </div>
     </div>
   );
 }
 
 const QUERY = gql`
-  query welcomeContent($language: LanguageCode)
-  @inContext(language: $language) {
+  query welcomeContent {
     shop {
       name
     }
-    products(first: 3) {
+    products(first: 250) {
       edges {
         node {
           handle
         }
       }
     }
-    collections(first: 3) {
+    collections(first: 250) {
       edges {
         node {
           handle

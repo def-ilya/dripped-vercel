@@ -23,9 +23,9 @@ export default function Header({collections, storeName}) {
   }, [isCartOpen]);
 
   return (
-    <header className="h-20 lg:h-24" role="banner">
+    <header className="h-20 lg:h-32" role="banner">
       <div
-        className={`z-20 h-12 lg:h-20 w-full border-b border-gray-200 px-6 md:px-8 md:py-3 lg:pt-4 lg:pb-0 mx-auto bg-white ${
+        className={`fixed z-20 h-20 lg:h-32 w-full border-b border-gray-200 px-6 md:px-8 md:py-6 lg:pt-8 lg:pb-0 mx-auto bg-white ${
           isMobileNavOpen ? '' : 'bg-opacity-95'
         }`}
       >
@@ -36,67 +36,27 @@ export default function Header({collections, storeName}) {
           }}
         >
           <div className="text-center w-full flex justify-between items-center">
-            {/* <CountrySelector /> */}
-            <div className="order-3">
-              <MobileNavigation
-                collections={collections}
-                isOpen={isMobileNavOpen}
-                setIsOpen={setIsMobileNavOpen}
-              />
-            </div>
-
+            <CountrySelector />
+            <MobileNavigation
+              collections={collections}
+              isOpen={isMobileNavOpen}
+              setIsOpen={setIsMobileNavOpen}
+            />
             <Link
-              className="font-black text-3xl tracking-widest order-2"
+              className="font-black uppercase text-3xl tracking-widest"
               to="/"
             >
-              dripped.
+              {storeName}
             </Link>
-            <div className="order-1 sm:order-3 mt-3">
-              <CartToggle
-                handleClick={() => {
-                  if (isMobileNavOpen) setIsMobileNavOpen(false);
-                }}
-              />
-            </div>
+            <CartToggle
+              handleClick={() => {
+                if (isMobileNavOpen) setIsMobileNavOpen(false);
+              }}
+            />
           </div>
-          {/* <Navigation collections={collections} storeName={storeName} /> */}
+          <Navigation collections={collections} storeName={storeName} />
         </div>
       </div>
     </header>
   );
 }
-
-// <header className="h-20 lg:h-32" role="banner">
-// <div
-//   className={`fixed z-20 h-20 lg:h-32 w-full border-b border-gray-200 px-6 md:px-8 md:py-6 lg:pt-8 lg:pb-0 mx-auto bg-white ${isMobileNavOpen ? '' : 'bg-opacity-95'
-//     }`}
-// >
-//   <div
-//     className="h-full flex lg:flex-col place-content-between"
-//     style={{
-//       paddingRight: isCartOpen ? scrollbarWidth : 0,
-//     }}
-//   >
-//     <div className="text-center w-full flex justify-between items-center">
-//       <CountrySelector />
-//       <MobileNavigation
-//         collections={collections}
-//         isOpen={isMobileNavOpen}
-//         setIsOpen={setIsMobileNavOpen}
-//       />
-//       <Link
-//         className="font-black text-3xl tracking-widest"
-//         to="/"
-//       >
-//         dripped.
-//       </Link>
-//       <CartToggle
-//         handleClick={() => {
-//           if (isMobileNavOpen) setIsMobileNavOpen(false);
-//         }}
-//       />
-//     </div>
-//     <Navigation collections={collections} storeName={storeName} />
-//   </div>
-// </div>
-// </header>

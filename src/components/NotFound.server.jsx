@@ -1,4 +1,8 @@
-import {useShop, useShopQuery, flattenConnection} from '@shopify/hydrogen';
+import {
+  useShopQuery,
+  ProductProviderFragment,
+  flattenConnection,
+} from '@shopify/hydrogen';
 import gql from 'graphql-tag';
 
 import Layout from './Layout.server';
@@ -29,19 +33,18 @@ function NotFoundHero() {
   );
 }
 
-export default function NotFound({country = {isoCode: 'US'}, response}) {
-  if (response) {
-    response.doNotStream();
-    response.writeHead({status: 404, statusText: 'Not found'});
-  }
-
-  const {languageCode} = useShop();
-
+export default function NotFound({country = {isoCode: 'US'}}) {
   const {data} = useShopQuery({
     query: QUERY,
     variables: {
       country: country.isoCode,
-      language: languageCode,
+      numProductMetafields: 0,
+      numProductVariants: 250,
+      numProductMedia: 0,
+      numProductVariantMetafields: 0,
+      numProductVariantSellingPlanAllocations: 0,
+      numProductSellingPlanGroups: 0,
+      numProductSellingPlans: 0,
     },
   });
   const products = data ? flattenConnection(data.products) : [];
@@ -66,40 +69,25 @@ export default function NotFound({country = {isoCode: 'US'}, response}) {
 }
 
 const QUERY = gql`
-  query NotFoundProductDetails($country: CountryCode, $language: LanguageCode)
-  @inContext(country: $country, language: $language) {
+  query NotFoundProductDetails(
+    $country: CountryCode
+    $includeReferenceMetafieldDetails: Boolean = false
+    $numProductMetafields: Int!
+    $numProductVariants: Int!
+    $numProductMedia: Int!
+    $numProductVariantMetafields: Int!
+    $numProductVariantSellingPlanAllocations: Int!
+    $numProductSellingPlanGroups: Int!
+    $numProductSellingPlans: Int!
+  ) @inContext(country: $country) {
     products(first: 3) {
       edges {
         node {
-          handle
-          id
-          title
-          variants(first: 1) {
-            edges {
-              node {
-                id
-                title
-                availableForSale
-                image {
-                  id
-                  url
-                  altText
-                  width
-                  height
-                }
-                priceV2 {
-                  currencyCode
-                  amount
-                }
-                compareAtPriceV2 {
-                  currencyCode
-                  amount
-                }
-              }
-            }
-          }
+          ...ProductProviderFragment
         }
       }
     }
   }
+
+  ${ProductProviderFragment}
 `;
