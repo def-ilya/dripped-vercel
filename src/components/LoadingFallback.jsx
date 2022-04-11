@@ -14,9 +14,7 @@ export default function LoadingFallback() {
             <div className="lg:hidden flex justify-center items-center w-7 h-full">
               <OpenIcon />
             </div>
-            <p className="font-black uppercase text-3xl tracking-widest">
-              Snowdevil
-            </p>
+
             <CartIcon />
           </div>
         </div>
