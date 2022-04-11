@@ -1,3 +1,4 @@
+import {Suspense} from 'react';
 import {Image, Link} from '@shopify/hydrogen';
 
 import MoneyCompareAtPrice from './MoneyCompareAtPrice.client';
@@ -12,14 +13,17 @@ export default function ProductCard({product}) {
   if (selectedVariant == null) {
     return null;
   }
-
   return (
     <div className="text-md mb-4 relative">
       <Link to={`/products/${product.handle}`}>
-        <div className="rounded-lg border-2 border-gray-200 mb-2 relative flex items-center justify-center overflow-hidden object-cover h-96">
+        <div className="rounded-sm m-auto border-2 border-gray-200 mb-2 relative flex items-center justify-center overflow-hidden object-cover w-72 h-72 max-w-[60vw] md:h-96 md:w-auto">
           {selectedVariant.image ? (
             <Image
-              className="bg-white absolute w-full h-full transition-all duration-500 ease-in-out transform bg-center bg-cover object-center object-contain hover:scale-110"
+              className={`bg-white absolute w-full h-full wtransition-all duration-500 ease-in-out transform bg-center bg-cover object-center object-contain hover:scale-110 ${
+                selectedVariant?.availableForSale
+                  ? ''
+                  : 'saturate-50 opacity-50'
+              }`}
               data={selectedVariant.image}
             />
           ) : null}
@@ -30,19 +34,27 @@ export default function ProductCard({product}) {
           )}
         </div>
 
-        <span className="text-black font-semibold mb-0.5">{product.title}</span>
+        <div className="m-auto w-full flex justify-center items-center md:items-start flex-col text-center md:text-left">
+          <span className="text-black font-semibold mb-0.5">
+            {product.title}
+          </span>
 
-        {product.vendor && (
-          <p className="text-gray-900 font-medium text-sm mb-0.5">
-            {product.vendor}
-          </p>
-        )}
-
-        <div className="flex ">
-          {selectedVariant.compareAtPriceV2 && (
-            <MoneyCompareAtPrice money={selectedVariant.compareAtPriceV2} />
+          {product.vendor && (
+            <p className="text-gray-900 font-medium text-sm mb-0.5">
+              {product.vendor}
+            </p>
           )}
-          <MoneyPrice money={selectedVariant.priceV2} />
+
+          <div className="">
+            {selectedVariant.compareAtPriceV2 && (
+              <Suspense fallback={null}>
+                <MoneyCompareAtPrice money={selectedVariant.compareAtPriceV2} />
+              </Suspense>
+            )}
+            <Suspense fallback={null}>
+              <MoneyPrice money={selectedVariant.priceV2} />
+            </Suspense>
+          </div>
         </div>
       </Link>
     </div>

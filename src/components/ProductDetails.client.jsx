@@ -117,11 +117,11 @@ export default function ProductDetails({product}) {
               as="h1"
               className="text-4xl font-bold text-black mb-4"
             />
-            {product.vendor && (
+            {/* {product.vendor && (
               <div className="text-sm font-medium mb-2 text-gray-900">
                 {product.vendor}
               </div>
-            )}
+            )} */}
             <span />
             <div className="flex justify-between md:block">
               <ProductPrice

@@ -1,9 +1,11 @@
-import {Fragment, useEffect, useState} from 'react';
-import {Link} from '@shopify/hydrogen/client';
+import {Fragment, useEffect} from 'react';
+import {Image, Link} from '@shopify/hydrogen/client';
 import {FocusTrap} from '@headlessui/react';
 
 import MobileCountrySelector from './MobileCountrySelector.client';
 import OpenIcon from './OpenIcon';
+
+let scrollPosition = 0;
 
 /**
  * A client component that defines the navigation for a mobile storefront
@@ -11,45 +13,53 @@ import OpenIcon from './OpenIcon';
 export default function MobileNavigation({collections, isOpen, setIsOpen}) {
   const OpenFocusTrap = isOpen ? FocusTrap : Fragment;
 
-  const [topScrollOffset, setTopScrollOffset] = useState(0);
-
   useEffect(() => {
     if (isOpen) {
-      setTopScrollOffset(window.scrollY);
+      scrollPosition = window.scrollY;
       document.body.style.position = 'fixed';
-    } else {
+    } else if (document.body.style.position) {
       document.body.style.position = '';
-      window.scrollTo(0, parseInt(topScrollOffset, 10));
+      window.scrollTo(0, scrollPosition);
     }
-  }, [isOpen, topScrollOffset]);
+  }, [isOpen]);
 
   return (
-    <div className="lg:hidden">
+    <div className="sm:hidden">
       <OpenFocusTrap>
         <button
           type="button"
           className="flex justify-center items-center w-7 h-full"
           onClick={() => setIsOpen((previousIsOpen) => !previousIsOpen)}
         >
+          <span className="sr-only">{isOpen ? 'Close' : 'Open'} Menu</span>
           {isOpen ? <CloseIcon /> : <OpenIcon />}
         </button>
         {isOpen ? (
-          <div className="fixed -left-0 top-20 w-full h-screen z-10 bg-gray-50 px-4 md:px-12 py-7">
+          <div className="fixed -left-0 top-20 w-full h-auto z-10 bg-gray-50 px-4 md:px-12 pb-7">
             <ul>
               {collections.map((collection) => (
-                <li className="border-b border-gray-200" key={collection.id}>
+                <li
+                  className="border-b border-gray-200 flex justify-between"
+                  key={collection.id}
+                >
                   <Link
-                    className="group py-5 text-gray-700 flex items-center justify-between"
+                    className="group py-5 text-gray-700 flex items-center justify-between uppercase font-bold"
                     to={`/collections/${collection.handle}`}
                     onClick={() => setIsOpen(false)}
                   >
                     {collection.title}
                     <ArrowRightIcon className="hidden group-hover:block" />
                   </Link>
+                  <Image
+                    width="100"
+                    height="100"
+                    className="aspect-square rounded-sm w-12 h-12 my-auto"
+                    data={collection.image}
+                  />
                 </li>
               ))}
             </ul>
-            <MobileCountrySelector />
+            {/* <MobileCountrySelector /> */}
           </div>
         ) : null}
       </OpenFocusTrap>

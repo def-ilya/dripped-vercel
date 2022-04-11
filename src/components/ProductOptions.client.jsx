@@ -9,6 +9,10 @@ export default function ProductOptions() {
   return (
     <>
       {options.map(({name, values}) => {
+        if (name == 'Title') {
+          return <></>;
+        }
+
         return (
           <fieldset key={name} className="mt-8">
             <legend className="mb-4 text-xl font-medium text-gray-900">
@@ -18,6 +22,10 @@ export default function ProductOptions() {
               {values.map((value) => {
                 const checked = selectedOptions[name] === value;
                 const id = `option-${name}-${value}`;
+
+                if (value == 'Default Title') {
+                  return <></>;
+                }
 
                 return (
                   <label key={id} htmlFor={id}>
