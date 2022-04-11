@@ -15,24 +15,28 @@ import ProductCard from '../components/ProductCard';
 import Welcome from '../components/Welcome.server';
 import {Suspense} from 'react';
 import Navigation from '../components/Navigation.client';
+import Disclaimer from '../components/Disclaimer.client';
 
 export default function Index({country = {isoCode: 'US'}}) {
   return (
-    <Layout>
-      <Welcome />
-      <Suspense fallback={null}>
-        <SeoForHomepage />
-      </Suspense>
-      <div className="relative mb-6">
-        {/* <Suspense fallback={<BoxFallback />}>
+    <>
+      <Disclaimer />
+      <Layout>
+        <Welcome />
+        <Suspense fallback={null}>
+          <SeoForHomepage />
+        </Suspense>
+        <div className="relative mb-6">
+          {/* <Suspense fallback={<BoxFallback />}>
           <FeaturedCollectionBox country={country} />
 
         </Suspense> */}
-        <Suspense fallback={<BoxFallback />}>
-          <FeaturedProductsBox country={country} />
-        </Suspense>
-      </div>
-    </Layout>
+          <Suspense fallback={<BoxFallback />}>
+            <FeaturedProductsBox country={country} />
+          </Suspense>
+        </div>
+      </Layout>
+    </>
   );
 }
 
