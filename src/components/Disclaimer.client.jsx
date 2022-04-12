@@ -11,19 +11,19 @@ export default function FeaturedCollection({collection}) {
   function agreeToTerms() {
     if (typeof window !== 'undefined') {
       // Perform localStorage action
-      localStorage.setItem('acceptedDisclaimerCond', 'true');
+      localStorage.setItem('needsToAccept', 'false');
       setVisible(false);
     }
   }
 
-  const acceptedTerms =
+  const needsToAccept =
     typeof window !== 'undefined'
-      ? localStorage.getItem('acceptedDisclaimerCond')
+      ? localStorage.getItem('needsToAccept')
       : null;
 
   return (
     <>
-      {acceptedTerms != 'true' && (
+      {!needsToAccept && (
         <div
           ref={modal}
           className="flex justify-center items-center top-0 left-0 w-screen h-screen bg-zinc-900 bg-opacity-40 z-30 fixed"
