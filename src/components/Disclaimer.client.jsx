@@ -6,24 +6,22 @@ import {useRef, useState} from 'react';
 export default function FeaturedCollection({collection}) {
   const modal = useRef(null);
 
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(true);
 
   function agreeToTerms() {
     if (typeof window !== 'undefined') {
       // Perform localStorage action
-      localStorage.setItem('needsToAccept', 'false');
+      localStorage.setItem('accepted', 'true');
       setVisible(false);
     }
   }
 
-  const needsToAccept =
-    typeof window !== 'undefined'
-      ? localStorage.getItem('needsToAccept')
-      : null;
+  const accepted =
+    typeof window !== 'undefined' ? localStorage.getItem('accepted') : null;
 
   return (
     <>
-      {needsToAccept == 'false' && (
+      {accepted != 'true' && (
         <div
           ref={modal}
           className="flex justify-center items-center top-0 left-0 w-screen h-screen bg-zinc-900 bg-opacity-40 z-30 fixed"
