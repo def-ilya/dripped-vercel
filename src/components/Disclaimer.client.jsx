@@ -23,7 +23,7 @@ export default function FeaturedCollection({collection}) {
 
   return (
     <>
-      {!needsToAccept && (
+      {needsToAccept != 'false' && (
         <div
           ref={modal}
           className="flex justify-center items-center top-0 left-0 w-screen h-screen bg-zinc-900 bg-opacity-40 z-30 fixed"
