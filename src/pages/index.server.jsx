@@ -156,7 +156,7 @@ const SEO_QUERY = gql`
 const QUERY = gql`
   query indexContent(
     $country: CountryCode
-    $numCollections: Int = 2
+    $numCollections: Int = 24
     $numProducts: Int = 24
     $includeReferenceMetafieldDetails: Boolean = false
     $numProductMetafields: Int = 0
