@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.4.1",
-    "@shopify/hydrogen": "file:src/hydrogen",
+    "@shopify/hydrogen": "@shopify/hydrogen",
     "graphql-tag": "^2.12.4",
     "path-to-regexp": "^6.2.0",
     "react": "0.0.0-experimental-529dc3ce8-20220124",
