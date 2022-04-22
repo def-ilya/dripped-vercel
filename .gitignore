@@ -1,5 +1,5 @@
 
-node_modules
+
 .DS_Store
 dist
 dist-ssr
@@ -37,8 +37,6 @@ coverage
 # Compiled binary addons (https://nodejs.org/api/addons.html)
 build/Release
 
-# Dependency directories
-node_modules/
 jspm_packages/
 
 # TypeScript cache
@@ -87,3 +85,7 @@ dist
  
 .vercel
 .output
+
+
+node_modules/*
+!/node_modules/\@shopify
