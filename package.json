@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.4.1",
-    "@shopify/hydrogen": "git+https://github.com/def-ilya/hydrogen-v11-patched.git",
+    "@shopify/hydrogen": "git+https://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:x-oauth-basic@github.com/def-ilya/hydrogen-v11-patched.git",
     "graphql-tag": "^2.12.4",
     "path-to-regexp": "^6.2.0",
     "react": "0.0.0-experimental-529dc3ce8-20220124",
