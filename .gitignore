@@ -1,7 +1,6 @@
 
 
 .DS_Store
-dist
 dist-ssr
 *.local
        # THIS IS A STUB FOR NEW HYDROGEN APPS
@@ -80,9 +79,8 @@ jspm_packages/
 .yarn/install-state.gz
 .pnp.*
 
-# Vite output
-dist
- 
+
+
 .vercel
 .output
 
