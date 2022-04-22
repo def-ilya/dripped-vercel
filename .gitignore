@@ -86,6 +86,3 @@ dist
 .vercel
 .output
 
-
-node_modules/*
-!/node_modules/\@shopify
