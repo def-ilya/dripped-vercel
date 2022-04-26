@@ -1,5 +1,5 @@
 import {Image, Link} from '@shopify/hydrogen';
-import {useRef, useState} from 'react';
+import {useRef, useState, useEffect} from 'react';
 /**
  * A shared component that defines a single featured collection to display on a storefront
  */
@@ -16,6 +16,13 @@ export default function FeaturedCollection({collection}) {
     }
   }
 
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('needsToAccept', 'true');
+      setVisible(true);
+    }
+  }, []);
+
   const needsToAccept =
     typeof window !== 'undefined'
       ? localStorage.getItem('needsToAccept')
@@ -23,7 +30,7 @@ export default function FeaturedCollection({collection}) {
 
   return (
     <>
-      {needsToAccept !== 'false' && (
+      {needsToAccept == 'true' && (
         <div
           ref={modal}
           className="flex justify-center items-center top-0 left-0 w-screen h-screen bg-zinc-900 bg-opacity-40 z-30 fixed"
