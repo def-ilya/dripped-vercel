@@ -49,7 +49,10 @@ export default function Header({collections, storeName}) {
               className="font-black text-3xl tracking-widest order-2"
               to="/"
             >
-              dripped.
+              <img
+                src="https://ik.imagekit.io/u0naetqfybt/logo_sVEmyi_o0.png"
+                className="h-8 md:h-10 lg:h-12 xl:h-14"
+              ></img>
             </Link>
             <div className="order-1 sm:order-3 mt-3">
               <CartToggle
