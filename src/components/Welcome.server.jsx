@@ -150,12 +150,12 @@ function TemplateLinks() {
  */
 export default function Welcome() {
   return (
-    <div className="text-gray-900 bg-[url('https://ik.imagekit.io/u0naetqfybt/asap_-uxhv42QA.gif')] pt-8 rounded-none -mx-5 md:mx-0 md:rounded-t-md my-0 mt-0 saturate-0 contrast-60">
-      <div className="text-center mb-16 text-white backdrop-blur-md w-full">
-        <h1 className="font-extrabold mb-4 text-5xl md:text-7xl ">dripped.</h1>
-        <p className="text-lg mb-8">save time. save money. get dripped.</p>
+    <div class="text-gray-900 bg-[url('https://ik.imagekit.io/u0naetqfybt/asap_-uxhv42QA.gif')] pt-8 rounded-none -mx-5 md:mx-0 md:rounded-t-md my-0 mt-0 saturate-0 contrast-60">
+      <div class="text-center mb-16 text-white backdrop-blur-md w-full">
+        <h1 class="font-extrabold mb-4 text-5xl md:text-7xl ">dripped.</h1>
+        <p class="text-lg mb-8">save time. save money. get dripped.</p>
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16"></div>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16"></div>
     </div>
   );
 }
