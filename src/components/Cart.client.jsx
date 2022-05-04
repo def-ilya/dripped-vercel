@@ -65,7 +65,7 @@ function CartHeader() {
         <span className="sr-only">Close cart</span>
       </button>
       <span className="text-xs text-gray-500">
-        Free shipping on orders over $50
+        Free shipping on orders over $70
       </span>
       <CartIconWithItems />
     </header>
@@ -208,14 +208,14 @@ function CartFooter() {
               className="text-right "
             />
           </div>
-          <div role="row" className="flex justify-between mt-2">
+          {/* <div role="row" className="flex justify-between mt-2">
             <span className="font-semibold" role="rowheader">
               Shipping
             </span>
             <span role="cell" className="uppercase">
-              Free
+              Calculated
             </span>
-          </div>
+          </div> */}
         </div>
         <CartShopPayButton className="flex my-4 justify-center w-full bg-[#5a31f4] py-2 rounded-md" />
         <CartCheckoutButton className={BUTTON_PRIMARY_CLASSES}>
