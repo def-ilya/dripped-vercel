@@ -156,7 +156,7 @@ export default function Welcome() {
         <p className="text-lg mb-8">save time. save money. get dripped.</p>
       </div>
       <div className="w-full bg-zinc-900 text-center">
-        <h3 className="text-3xl text-white py-1">
+        <h3 className="text-2xl sm:text-3xl text-white py-1">
           Get free shipping on orders over $70!
         </h3>
       </div>
